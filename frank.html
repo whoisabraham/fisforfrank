@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raining Cats and Dogs</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: #222;
+    }
+    .image {
+      position: absolute;
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    const images = [
+      'f.png',
+      'm.png',
+    ];
+
+    function createImageElement() {
+      const img = document.createElement('img');
+      img.src = images[Math.floor(Math.random() * images.length)];
+      img.className = 'image';
+      img.style.width = `${Math.random() * 100 + 50}px`;
+      img.style.top = `${-200}px`;
+      img.style.left = `${Math.random() * window.innerWidth}px`;
+      document.body.appendChild(img);
+      return img;
+    }
+
+    function animateImage(img) {
+      const duration = Math.random() * 3 + 2;
+      img.style.transition = `all ${duration}s linear`;
+      img.style.transform = `translateY(${window.innerHeight + 200}px)`;
+      img.style.opacity = 1;
+      setTimeout(() => {
+        img.remove();
+      }, (parseFloat(duration) + 1) * 1000);
+    }
+
+    function generateRain() {
+      const img = createImageElement();
+      setTimeout(() => {
+        animateImage(img);
+      }, 50);
+    }
+
+    setInterval(generateRain, 300);
+  </script>
+</body>
+</html>
